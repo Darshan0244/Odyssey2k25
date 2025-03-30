@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Blindfold Challenge</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://media.licdn.com/dms/image/D4D12AQFIubXWJsZ_mA/article-cover_image-shrink_720_1280/0/1678878755071?e=2147483647&v=beta&t=70gYWnCSgxuEpX2iXab8nsu6a8612gHVe3wdWj8tmv0"); /* Replace with your background image URL */
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(10px); /* Blur background image */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: black;
+      }
+      .container {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px); /* Only using blur filter */
+        max-width: 90%; /* Makes the container shrink responsively */
+        width: 90%;
+        margin: 0 auto;
+      }
+      .logo {
+        margin-bottom: 20px;
+      }
+      .logo img {
+        width: 150px;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+      h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ffffff;
+        border: 2px solid black;
+        margin-bottom: 20px;
+      }
+      .event-details {
+        margin: 20px 0;
+      }
+      .rules,
+      .amount,
+      .team-size,
+      .coordinators {
+        margin: 10px 0;
+        text-align: left;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .rules h2,
+      .amount h2,
+      .team-size h2,
+      .coordinators h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      .btn-group {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+      }
+      .btn {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 50px;
+        background-color: #1e90ff;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 300%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: skewX(-20deg);
+        transition: all 0.5s ease;
+      }
+      .btn:hover:before {
+        left: 100%;
+      }
+      .btn:hover {
+        transform: scale(1.1);
+        background: linear-gradient(90deg, #1e90ff, #63b3ff);
+        box-shadow: 0 0 15px rgba(30, 144, 255, 0.7),
+          0 0 20px rgba(30, 144, 255, 0.5);
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        transition: transform 0.5s ease-out;
+        z-index: -1;
+      }
+      .btn:active::after {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+      }
+      .register-btn {
+        background-color: #9600b4;
+      }
+      .rulebook-btn {
+        background-color: #ff2600;
+      }
+      .register-btn:hover {
+        background-color: #ff00bb;
+        box-shadow: 0px 0px 15px 5px rgba(93, 0, 78, 0.7);
+      }
+      .rulebook-btn:hover {
+        background-color: #ff6b50;
+        box-shadow: 0px 0px 15px 5px rgba(122, 19, 1, 0.7);
+      }
+      @media screen and (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        .container {
+          padding: 15px;
+        }
+        .btn-group {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+          color: #ffffff;
+        }
+        .logo img {
+          width: 120px;
+        }
+        .container {
+          padding: 10px;
+        }
+        .rules,
+        .amount,
+        .team-size,
+        .coordinators {
+          font-size: 1rem;
+        }
+        .btn {
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="Artboard 5-0.png" alt="Event Logo" />
+        <!-- Replace with your logo image -->
+      </div>
+      <h1>The Blindfold Challenge</h1>
+      <div class="event-details">
+        <div class="rules">
+          <h2 style="font-weight: bolder">RULES</h2>
+          <p>1. This game will be played by 2 players, it consists of a minefield with a lot of obstacles (mines).</p>
+          <p>2. One player wears a blindfold and will be the one navigating the minefield.</p>
+          <p>3. The other player stands outside the minefield and gives instructions to the blindfolded player.</p>
+          <p>4. The blindfolded player starts at the designated starting point and must reach the finishing line safely without stepping on a mine.</p>
+          <p>5. The guiding player can give verbal instructions to help the blindfolded player move around, but cannot physically touch the blindfolded player.</p>
+          <p>6. If the blindfolded player steps on or touches a mine, they must return to the starting point and begin again.</p>
+          <p>7. The blindfolded player wins by reaching the finish line without touching any mines.</p>
+          <p>8. The time limit for the game is 2 minutes.</p>
+        </div>
+        <div class="amount">
+          <h2>Registration Amount => Rs. 50 per head</h2>
+        </div>
+        <div class="team-size">
+          <h2>Team Size</h2>
+          <p>2 members per team</p>
+        </div>
+
+        <div>
+          <h2
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
+          >
+            Venue => A-303
+          </h2>
+        </div>
+
+        <br />
+        <div class="coordinators">
+          <h2>Event Coordinators</h2>
+          <h3>Student Coordinators: Priya Mallapur, Arpita Budagoudar - 8431156675/ 8105485849</h3>
+          <h3>Faculty Coordinator: Prof. Radhika Anvekar (NT) - 7846090219</h3>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn register-btn">Register Now</button>
+        <button class="btn rulebook-btn">RuleBook</button>
+      </div>
+    </div>
+  </body>
+</html>

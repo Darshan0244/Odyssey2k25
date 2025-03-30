@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODYSSEY 2025 - Together Towards Sustainable Tomorrow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="cc.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader-content">
+          <div class="loading-logo">
+              <svg viewbox="0 0 100 100" width="80" height="80">
+                  <circle class="orbit" cx="50" cy="50" r="40" fill="none" stroke="rgba(142, 194, 96, 0.3)" stroke-width="2" />
+                  <circle class="planet" cx="50" cy="10" r="5" fill="#8ec260" />
+                  <circle class="planet-inner" cx="50" cy="50" r="15" fill="rgba(107, 92, 138, 0.7)" />
+              </svg>
+          </div>
+          <div class="loading-text">
+              <span>L</span>
+              <span>O</span>
+              <span>A</span>
+              <span>D</span>
+              <span>I</span>
+              <span>N</span>
+              <span>G</span>
+          </div>
+          <div class="loading-bar-container">
+              <div class="loading-bar"></div>
+              <div class="loading-highlight"></div>
+          </div>
+          <div class="counter">0%</div>
+          <div class="loading-message">Preparing your journey...</div>
+      </div>
+    </div>
+  
+    <section class="hero">
+        <div class="hero-content flex flex-col items-center justify-center px-4 text-center">
+            <div class="logo-container mb-10" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="300">
+                <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" alt="Odyssey 2025 Logo" class="logo mx-auto">
+            </div>
+    
+            <Span id="together" style="color: white; font-size: 3.5rem; font-weight: 700; font-family: Blanka-Regular; letter-spacing: 0.5rem; margin: 1rem;">Together Towards Sustainable Tommorow</Span>
+            
+            <div class="event-info flex flex-col md:flex-row justify-center gap-8 md:gap-16 mb-16 text-white">
+                <div class="event-card" data-aos="fade-right" data-aos-duration="800" data-aos-delay="700">
+                    <div class="event-icon">
+                        <svg viewbox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <div class="event-text text-left">
+                        <span class="info-title">Countdown</span>
+                        <div id="countdown" class="countdown-container">
+                            <div class="countdown-item">
+                                <span id="days" class="countdown-value">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="hours" class="countdown-value">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="minutes" class="countdown-value">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="seconds" class="countdown-value">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="700">
+                    <div class="event-icon">
+                        <svg viewbox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div class="event-text text-left">
+                        <span class="info-title">Location</span>
+                        <span class="info-detail">Jain College of Engineering</span>
+                    </div>
+                </div>
+            </div>
+    
+            <style>
+                .logo {
+                    width: 60vh; /* Default size for larger screens */
+                    height: auto;
+                }
+                @media (max-width: 768px) { /* Adjust for screens smaller than 768px, like mobile */
+                    .logo {
+                        width: 40vh; /* Smaller width for mobile devices */
+                    }
+    
+                    #together {
+                        font-size: 2rem;
+                    }
+                }
+                @font-face {
+                    font-family: 'Blanka-Regular'; /* Replace with the actual font family name */
+                    src: url('Blanka-Regular.otf') format('opentype'); /* Replace with the actual path and file name */
+                }
+    
+                /* Countdown Styles */
+                .countdown-container {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 5px;
+                }
+    
+                .countdown-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 8px;
+                    padding: 8px;
+                    min-width: 60px;
+                }
+    
+                .countdown-value {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: var(--secondary-color, #6ED8B9);
+                }
+    
+                .countdown-label {
+                    font-size: 0.7rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: rgba(255, 255, 255, 0.7);
+                }
+    
+                @media (max-width: 768px) {
+                    .countdown-container {
+                        flex-wrap: wrap;
+                        justify-content: center;
+                    }
+                    
+                    .countdown-item {
+                        min-width: 50px;
+                        padding: 5px;
+                    }
+                    
+                    .countdown-value {
+                        font-size: 1.2rem;
+                    }
+                    
+                    .countdown-label {
+                        font-size: 0.6rem;
+                    }
+                }
+            </style>
+            
+            <div class="cta-container flex flex-col md:flex-row gap-6" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="900">
+                <a href="https://forms.gle/HXwVxJxx2PPfje7N9" class="cta-button">Register Now</a>
+                <button class="cta-button secondary" onclick="scrollToBooks()">Central Rulebook</button>
+            </div>
+            
+            <div class="scroll-indicator flex flex-col items-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="1100">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="scroll-arrow">
+                    <span class="mr-2">Scroll Down</span>
+                    <svg viewbox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            // Set the event date - April 11, 2025 12:01 AM
+            const eventDate = new Date('2025-04-11T00:01:00').getTime();
+            
+            // Update the countdown every second
+            const countdown = setInterval(function() {
+                // Get current date and time
+                const now = new Date().getTime();
+                
+                // Calculate the time remaining
+                const timeRemaining = eventDate - now;
+                
+                // Calculate days, hours, minutes, and seconds
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                // Display the countdown
+                document.getElementById('days').innerHTML = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+                
+                // If the countdown is over, display a message
+                if (timeRemaining < 0) {
+                    clearInterval(countdown);
+                    document.getElementById('countdown').innerHTML = "<span class='info-detail'>Event Started!</span>";
+                }
+            }, 1000);
+
+            
+        </script>
+    </section>
+  
+    <div class="wrapper">
+        <div class="itemLeft item1">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/cdf78a21-4f9f-4e9d-b86b-dd1aad055953.image.png?v=1743321821151" alt="Item 1">
+        </div>
+        <div class="itemLeft item2">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/573b14ae-8198-46c6-816b-d1a92e77b972.image.png?v=1743321844211" alt="Item 2">
+        </div>
+        <div class="itemLeft item3">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/3aee7e7c-84e9-422e-aa53-d1ea94636718.image.png?v=1743321859700" alt="Item 3">
+        </div>
+        <div class="itemLeft item4">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/e3d54ad5-ca32-41f6-a8fb-ef3d75b0d39a.image.png?v=1743321884958" alt="Item 4">
+        </div>
+        <div class="itemLeft item5">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/35a3e509-4b23-4abb-872b-9fc0de0c6d2f.image.png?v=1743321906984" alt="Item 5">
+        </div>
+        <div class="itemLeft item6">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/59e35e6b-33b4-43f3-8ffd-4b9143efcf95.image.png?v=1743321920133" alt="Item 6">
+        </div>
+        <div class="itemLeft item7">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/7ad35bbe-91d9-4237-b30b-f801de105330.image.png?v=1743321946201" alt="Item 7">
+        </div>
+        <div class="itemLeft item8">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/25b8685e-2822-452d-aea7-52049db7c170.image.png?v=1743321962201" alt="Item 8">
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="itemRight item1">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/9b89d2ff-7c5e-4575-883d-18ce9cd2442a.image.png?v=1743321975764" alt="Item 9">
+        </div>
+        <div class="itemRight item2">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/a94ed3dc-e032-448c-9644-faee89ab49cd.image.png?v=1743321991759" alt="Item 10">
+        </div>
+        <div class="itemRight item3">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/2ca25fac-be36-495b-891a-d159ae9f75ea.image.png?v=1743322007188" alt="Item 11">
+        </div>
+        <div class="itemRight item4">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/f80d4ba0-c120-4044-ad62-eb0f72540b8a.image.png?v=1743322025593" alt="Item 12">
+        </div>
+        <div class="itemRight item5">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/81a3171c-f54b-4a7b-98eb-686a999bea75.image.png?v=1743322041388" alt="Item 13">
+        </div>
+        <div class="itemRight item6">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/20773160-6019-4a16-8698-b5e0bdd589fa.image.png?v=1743322068042" alt="Item 14">
+        </div>
+        <div class="itemRight item7">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/464e5889-ee7d-40c0-99f8-02aa7018ea7f.image.png?v=1743322073573" alt="Item 15">
+        </div>
+        <div class="itemRight item8">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/e3abe025-0e97-4166-a64f-05a38d78e869.image.png?v=1743322088190" alt="Item 16">
+        </div>
+    </div>
+  
+<!-- Books Section Container -->
+<section class="books-section py-20 px-4">
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-center text-white mb-12">Explore Our Events</h2>
+        
+        <!-- Books Container with Grid Layout -->
+        <div class="books-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  
+            <!-- Cultural Events Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>Central Events</h2>
+                    <ul>
+                        <li>🎵 Drama/Mime</li>
+                        <li>💃 Singing - Solo</li>
+                        <li>👗 Fashion Show</li>
+                        <li>🎭 & Many More</li>
+                    </ul>
+                    <a href="Central.html" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">Central Events</p>
+                </div>
+            </div>
+
+            <!-- CS Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>CS Department</h2>
+                    <ul>
+                        <li>💻 Code Quest</li>
+                        <li>🤖 AI Innovation Challenge</li>
+                        <li>⚙️ Hackathon 2025</li>
+                        <li>🌐 Web Design Contest</li>
+                    </ul>
+                    <a href="https://cs-department-website.com" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">CS Department</p>
+                </div>
+            </div>
+
+            <!-- EC Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>ENC Department</h2>
+                    <ul>
+                        <li>🔌 BGMI</li>
+                        <li>📡 Side-Football</li>
+                        <li>🤖 Treasure Hunt</li>
+                        <li>🔋 Robo-Race</li>
+                    </ul>
+                    <a href="ENC-Events.html" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">ENC Department</p>
+                </div>
+            </div>
+
+            <!-- EC Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>EEE Department</h2>
+                    <ul>
+                        <li>🔌 Technical Quiz</li>
+                        <li>📡 Minecraft Speed Run</li>
+                        <li>🤖 Brick Walking</li>
+                        <li>🔋 Snake and Ladder</li>
+                    </ul>
+                    <a href="EEE.html" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">EEE Department</p>
+                </div>
+            </div>
+
+            <!-- Civil Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>Civil Department</h2>
+                    <ul>
+                        <li>🌉 Smriti Sangram</li>
+                        <li>🏗️ CAD BREAK-OUT</li>
+                        <li>📐 ROYAL RUMBLE</li>
+                        <li>🌿 DEAD SHOT</li>
+                    </ul>
+                    <a href="Civil.html" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">Civil Department</p>
+                </div>
+            </div>
+
+            <!-- Mechanical Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>Mechanical Department</h2>
+                    <ul>
+                        <li>🔧 CAD/CAM Challenge</li>
+                        <li>🚗 Auto Design Contest</li>
+                        <li>🖨️ 3D Printing Workshop</li>
+                        <li>⚡ Energy Efficiency</li>
+                    </ul>
+                    <a href="https://mech-department-website.com" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">Mechanical Department</p>
+                </div>
+            </div>
+
+            <!-- MBA Department Book -->
+            <div class="book mx-auto">
+                <div class="inner">
+                    <h2>MBA Department</h2>
+                    <ul>
+                        <li>📊 Balance The Ball</li>
+                        <li>🔍 Logo Quiz</li>
+                        <li>📈 BlindFold Challenge</li>
+                        <li>🚀 New Age TechBiz Startup</li>
+                    </ul>
+                    <a href="MBA.html" class="explore-btn" target="_blank">Explore</a>
+                </div>
+                <div class="cover">
+                    <p class="text">MBA Department</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer Section -->
+<footer class="footer-section">
+    <div class="footer-container">
+        <!-- Event Info Column -->
+        <div class="footer-column">
+            <h3 class="footer-heading">EVENT INFO</h3>
+            <div class="footer-underline"></div>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">Event Book - Download</a></li>
+                <li><a href="#" class="footer-link">RULEBOOK ODYSSEY - Download</a></li>
+            </ul>
+        </div>
+
+        <!-- Developers Column -->
+        <!-- <div class="footer-column">
+            <h3 class="footer-heading">DEVELOPERS</h3>
+            <div class="footer-underline"></div>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">ADITYA DHAMANEKAR</a></li>
+                <li><a href="#" class="footer-link">SUCHIT MALALIKAR</a></li>
+                <li><a href="#" class="footer-link">MEHETRI ADITYA</a></li>
+                <li><a href="#" class="footer-link">ATHARVA CHORLEKAR</a></li>
+            </ul>
+        </div> -->
+
+        <!-- Academic Team Column -->
+        <div class="footer-column">
+            <h3 class="footer-heading">ACADEMIC TEAM</h3>
+            <div class="footer-underline"></div>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link">Dr. J. Shivakumar</a></li>
+                <li><span class="footer-subtitle">Principal & Director</span></li>
+                <li><a href="#" class="footer-link">Dr. Raajashekhargouda Patil</a></li>
+                <li><span class="footer-subtitle">Convenor</span></li>
+                <li><a href="#" class="footer-link">Prof. Varsha Gokak</a></li>
+                <li><span class="footer-subtitle">SEC Coordinator</span></li>
+            </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-column">
+            <h3 class="footer-heading">CONTACT</h3>
+            <div class="footer-underline"></div>
+            <ul class="footer-links">
+                <li><span class="footer-text">Jain College Of Engineering Belgaum</span></li>
+                <li><a href="tel:+918412411192" class="footer-link">+91 8412411192</a></li>
+                <li><a href="mailto:Info@Jainbgm.in" class="footer-link">Info@Jainbgm.in</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright-section">
+        <div class="logo-container">
+            <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" alt="Odyssey Logo" class="footer-logo">
+        </div>
+        <p class="copyright-text">Copyright © ODYSSEY All Rights Reserved.</p>
+    </div>
+</footer>
+
+<style>
+/* Footer Section Styles */
+.footer-section {
+    background-color: #191B22;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: white;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-heading {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.footer-underline {
+    width: 50px;
+    height: 3px;
+    background-color: #6ED8B9;
+    margin-bottom: 1.5rem;
+    transition: width 0.3s ease;
+}
+
+.footer-column:hover .footer-underline {
+    width: 70px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link {
+    color: #9ca3af;
+    text-decoration: none;
+    display: block;
+    padding: 0.4rem 0;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #6ED8B9;
+    transform: translateX(5px);
+}
+
+.footer-subtitle {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: block;
+    padding-left: 0.5rem;
+}
+
+.footer-text {
+    color: #9ca3af;
+    display: block;
+    padding: 0.4rem 0;
+}
+
+/* Copyright Section */
+.copyright-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+.copyright-text {
+    color: #6b7280;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .footer-column {
+        width: 100%;
+    }
+    
+    .footer-heading {
+        font-size: 1.1rem;
+    }
+}
+</style>
+
+
+
+    <script>
+      // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: false,
+                mirror: false,
+                offset: 50,
+                duration: 1000,
+                easing: 'ease-in-out'
+            });
+        });
+        
+        // Preloader Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preloader Animation
+            const preloader = document.querySelector('.preloader');
+            const preloaderContent = document.querySelector('.preloader-content');
+            const loadingBar = document.querySelector('.loading-bar');
+            const loadingHighlight = document.querySelector('.loading-highlight');
+            const counter = document.querySelector('.counter');
+            const loadingMessage = document.querySelector('.loading-message');
+
+            // Initialize GSAP
+            gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+            // Array of loading messages
+            const messages = [
+                "Preparing your journey...",
+                "Mapping sustainability routes...",
+                "Calculating green initiatives...",
+                "Connecting innovators...",
+                "Building tomorrow, today..."
+            ];
+
+            // Change loading message periodically
+            let currentMessage = 0;
+            const messageInterval = setInterval(() => {
+                currentMessage = (currentMessage + 1) % messages.length;
+                gsap.to(loadingMessage, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        loadingMessage.textContent = messages[currentMessage];
+                        gsap.to(loadingMessage, {
+                            opacity: 0.8,
+                            duration: 0.5
+                        });
+                    }
+                });
+            }, 2000);
+
+            // Dynamic loading bar
+            let progress = 0;
+            const interval = setInterval(() => {
+                // Non-linear progress to simulate realistic loading
+                const increment = Math.floor(Math.random() * 3) + (progress < 50 ? 2 : progress < 80 ? 1 : 0.5);
+                progress += increment;
+
+                if (progress > 100) progress = 100;
+
+                // Animate loading bar
+                gsap.to(loadingBar, {
+                    width: `${progress}%`,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+
+                // Make loading highlight visible during progress
+                if (progress > 0 && progress < 100) {
+                    loadingHighlight.style.opacity = 1;
+                }
+
+                // Update counter with a counting effect
+                gsap.to(counter, {
+                    textContent: Math.floor(progress) + "%",
+                    duration: 0.3,
+                    ease: "power1.out",
+                    snap: { textContent: 1 }
+                });
+
+                // Add glow effect as progress increases
+                const glowIntensity = (progress / 100) * 15;
+                gsap.to(counter, {
+                    textShadow: `0 0 ${glowIntensity}px rgba(142, 194, 96, 0.7)`,
+                    duration: 0.3
+                });
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    clearInterval(messageInterval);
+
+                    // Final animation when loading completes
+                    setTimeout(() => {
+                        // Flash effect
+                        gsap.to('.preloader', {
+                            backgroundColor: 'rgba(142, 194, 96, 0.3)',
+                            duration: 0.2,
+                            repeat: 3,
+                            yoyo: true
+                        });
+
+                        // Scale up loading logo
+                        gsap.to('.loading-logo', {
+                            scale: 1.5,
+                            duration: 0.8,
+                            ease: "back.out(1.7)"
+                        });
+
+                        // Fade out preloader with 3D effect
+                        setTimeout(() => {
+                            gsap.to(preloaderContent, {
+                                opacity: 0,
+                                scale: 1.2,
+                                rotationY: 90,
+                                duration: 0.8,
+                                ease: "power3.in"
+                            });
+
+                            gsap.to(preloader, {
+                                opacity: 0,
+                                duration: 0.5,
+                                delay: 0.8,
+                                onComplete: () => {
+                                    preloader.style.display = 'none';
+                                    // Trigger AOS animations after preloader is gone
+                                    AOS.refresh();
+                                }
+                            });
+                        }, 1000);
+                    }, 500);
+                }
+            }, 80);
+            
+            // Add GSAP animations for hero section elements
+            function startPageAnimations() {
+                // Hero title reveal animation
+                gsap.from('.hero-title', {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.5
+                });
+                
+                // Divider line animation
+                gsap.from('.divider span:first-child', {
+                    width: 0,
+                    duration: 1,
+                    delay: 0.8
+                });
+                
+                gsap.from('.divider span:last-child', {
+                    width: 0,
+                    duration: 0.5,
+                    delay: 1.3
+                });
+                
+                // Subtitle animation
+                gsap.from('.hero-subtitle', {
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: 1.5
+                });
+                
+                // Event info cards animation
+                gsap.from('.event-card', {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    delay: 1.8
+                });
+                
+                // CTA buttons animation
+                gsap.from('.cta-button', {
+                    scale: 0.8,
+                    opacity: 0,
+                    duration: 0.6,
+                    stagger: 0.2,
+                    delay: 2.1,
+                    ease: "back.out(1.7)"
+                });
+                
+                // Scroll indicator animation
+                gsap.from('.scroll-indicator', {
+                    y: -20,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: 2.5
+                });
+            }
+            
+            // Function to add GSAP animations
+            function initHeroAnimations() {
+                // Only run these if preloader is not showing
+                if (preloader.style.display === 'none') {
+                    startPageAnimations();
+                }
+            }
+            
+            // Call the animation function after a short delay
+            setTimeout(initHeroAnimations, 3000);
+        });
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // About section animations
+        gsap.from('#about .about-image', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('#about .about-content', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+        
+        // Stats counter animation
+        const statItems = document.querySelectorAll('.stat-item h4');
+        statItems.forEach(item => {
+            const value = item.innerText;
+            item.innerText = '0';
+            
+            ScrollTrigger.create({
+                trigger: item,
+                start: 'top 80%',
+                onEnter: () => {
+                    gsap.to(item, {
+                        innerText: value,
+                        duration: 2,
+                        ease: 'power2.out',
+                        snap: { innerText: 1 }
+                    });
+                }
+            });
+        });
+        
+        // Mission cards staggered animation
+        gsap.from('.mission-card', {
+            scrollTrigger: {
+                trigger: '#mission',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'back.out(1.2)'
+        });
+    });
+    </script>
+</body>
+</html>

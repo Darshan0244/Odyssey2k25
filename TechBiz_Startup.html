@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Age Techbiz Startup</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://media.licdn.com/dms/image/D4D12AQFIubXWJsZ_mA/article-cover_image-shrink_720_1280/0/1678878755071?e=2147483647&v=beta&t=70gYWnCSgxuEpX2iXab8nsu6a8612gHVe3wdWj8tmv0"); /* Replace with your background image URL */
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(10px); /* Blur background image */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: black;
+      }
+      .container {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px); /* Only using blur filter */
+        max-width: 90%; /* Makes the container shrink responsively */
+        width: 90%;
+        margin: 0 auto;
+      }
+      .logo {
+        margin-bottom: 20px;
+      }
+      .logo img {
+        width: 150px;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+      h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ffffff;
+        border: 2px solid black;
+        margin-bottom: 20px;
+      }
+      .event-details {
+        margin: 20px 0;
+      }
+      .rules,
+      .amount,
+      .team-size,
+      .coordinators {
+        margin: 10px 0;
+        text-align: left;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .rules h2,
+      .amount h2,
+      .team-size h2,
+      .coordinators h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      .btn-group {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+      }
+      .btn {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 50px;
+        background-color: #1e90ff;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 300%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: skewX(-20deg);
+        transition: all 0.5s ease;
+      }
+      .btn:hover:before {
+        left: 100%;
+      }
+      .btn:hover {
+        transform: scale(1.1);
+        background: linear-gradient(90deg, #1e90ff, #63b3ff);
+        box-shadow: 0 0 15px rgba(30, 144, 255, 0.7),
+          0 0 20px rgba(30, 144, 255, 0.5);
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        transition: transform 0.5s ease-out;
+        z-index: -1;
+      }
+      .btn:active::after {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+      }
+      .register-btn {
+        background-color: #9600b4;
+      }
+      .rulebook-btn {
+        background-color: #ff2600;
+      }
+      .register-btn:hover {
+        background-color: #ff00bb;
+        box-shadow: 0px 0px 15px 5px rgba(93, 0, 78, 0.7);
+      }
+      .rulebook-btn:hover {
+        background-color: #ff6b50;
+        box-shadow: 0px 0px 15px 5px rgba(122, 19, 1, 0.7);
+      }
+      @media screen and (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        .container {
+          padding: 15px;
+        }
+        .btn-group {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+          color: #ffffff;
+        }
+        .logo img {
+          width: 120px;
+        }
+        .container {
+          padding: 10px;
+        }
+        .rules,
+        .amount,
+        .team-size,
+        .coordinators {
+          font-size: 1rem;
+        }
+        .btn {
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="Artboard 5-0.png" alt="Event Logo" />
+        <!-- Replace with your logo image -->
+      </div>
+      <h1>New Age Techbiz Startup</h1>
+      <div class="event-details">
+        <div class="rules">
+          <h2 style="font-weight: bolder">RULES</h2>
+          <p>1. Basic stationery will be provided by the organizing team.</p>
+          <p>2. External products/accessories are entertained and can be used to build the model.</p>
+          <p>3. Models have to be built in the venue specified by the organizing team in the college premises.</p>
+          <p>4. No wastage of the material issued –negative score if found by the judges or organizing team.</p>
+          <p>5. College infrastructure should not be hampered in the process of model making- team indulging in this kind of act will be disqualified.</p>
+          <p>6. Power supply or any other resource for model making will not be provided.</p>
+          <p>7. Entry fee of Rs. 250 with a maximum of 5 participants in a team.</p>
+          <p>8. Attractive cash prizes for winners and runners-up with certificates.</p>
+        </div>
+        <div class="amount">
+          <h2>Registration Amount => Rs. 50 per head</h2>
+        </div>
+        <div class="team-size">
+          <h2>Team Size</h2>
+          <p>Maximum of 5 members per team</p>
+        </div>
+
+        <div>
+          <h2
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
+          >
+            Venue => A-301
+          </h2>
+        </div>
+
+        <br />
+        <div class="coordinators">
+          <h2>Event Coordinators</h2>
+          <h3>Student Coordinators: Shilpa M, Pooja B, Sushant, Vinayak - 9604158829/9036810168</h3>
+          <br>
+          <h3>Faculty Coordinator: Dr. Vaibhav Veergoudar (T) - 9972200334</h3>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn register-btn">Register Now</button>
+        <button class="btn rulebook-btn">RuleBook</button>
+      </div>
+    </div>
+  </body>
+</html>
