@@ -455,7 +455,7 @@ a:active {
       font-size: 1rem;
     }
     .card img {
-      height: 200px; /* Adjusted for smaller screens */
+      height: 400px; /* Adjusted for smaller screens */
     }
   }
 
