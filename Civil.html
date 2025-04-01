@@ -77,8 +77,42 @@
 
         
     </div>
+    <!-- Aurora Effect Layers -->
+<div class="aurora"></div>
+<div class="aurora"></div>
+<div class="aurora"></div>
+
+<!-- Floating Particles -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const body = document.body;
+    for (let i = 0; i < 50; i++) {
+        let particle = document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.top = `${Math.random() * 100}vh`;
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.animationDuration = `${3 + Math.random() * 5}s`;
+        body.appendChild(particle);
+    }
+});
+</script>
+
+    
+    
+    <div class="bubbles">
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+    </div>
+    <div class="shimmer"></div>
+    
+    
 
     <script src="Civil.js"></script>
+    
+
 
 
 
