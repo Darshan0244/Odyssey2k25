@@ -18,6 +18,7 @@
             --dark-color: #20232a;
             --light-color: #f4f4f4;
             --overlay-color: rgba(32, 35, 42, 0.9);
+            --typing-duration: 1.5s;
         }
         
         body {
@@ -25,6 +26,8 @@
             background: radial-gradient(circle, rgba(106, 92, 138, 0.8) 0%, rgba(32, 35, 42, 0.95) 100%);
             color: #fff;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         
         .hero {
@@ -88,15 +91,9 @@
         }
         
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .cta-button {
@@ -209,6 +206,139 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
         
+        /* CELEBRATION ANIMATIONS */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation-name: confetti-fall;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translate3d(0, -100px, 0) rotateZ(0deg); }
+            100% { transform: translate3d(0, calc(100vh + 100px), 0) rotateZ(360deg); }
+        }
+        
+        .celebration-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+        
+        @keyframes scale-bounce {
+            0% { transform: translate(-50%, -50%) scale(0.5); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            70% { transform: translate(-50%, -50%) scale(0.9); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7);
+            animation: firework-explosion 2s ease-out;
+            transform-origin: center center;
+        }
+        
+        @keyframes firework-explosion {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        
+        .countdown-complete-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1500;
+            background: radial-gradient(circle, rgba(106, 92, 138, 0.9) 0%, rgba(32, 35, 42, 1) 100%);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .pulsating-logo {
+            animation: logo-pulse 2s infinite;
+        }
+        
+        @keyframes logo-pulse {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(142, 194, 96, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 20px rgba(142, 194, 96, 0.8));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(142, 194, 96, 0.5));
+            }
+        }
+        
+        .loading-text {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            letter-spacing: 3px;
+            position: relative;
+        }
+        
+        .animate-typing {
+            animation: typing var(--typing-duration) infinite;
+        }
+        
+        @keyframes typing {
+            0% { width: 0; }
+            33% { width: 1em; }
+            66% { width: 2em; }
+            100% { width: 3em; }
+        }
+        
+        .dots {
+            display: inline-block;
+            overflow: hidden;
+        }
+        
         @media (max-width: 768px) {
             .logo {
                 width: 40vh;
@@ -247,14 +377,19 @@
                 padding: 1.5rem;
                 margin: 0 1rem;
             }
+            
+            .celebration-text {
+                font-size: 3rem;
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
-    
+    <!-- Main Countdown Section -->
     <section class="hero">
         <div class="container mx-auto px-4 text-center">
-            <div class="logo-container mb-10" data-aos="fade-down" data-aos-duration="1000">
+            <div class="logo-container mb-10">
                 <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" alt="Odyssey 2025 Logo" class="logo mx-auto">
             </div>
             
@@ -322,11 +457,31 @@
         </div>
     </section>
     
+    <!-- Celebration Animation Container -->
+    <div class="celebration-container" id="celebration-container">
+        <div class="celebration-text" id="celebration-text">
+            WELCOME TO ODYSSEY 2025!
+        </div>
+    </div>
+    
+    <!-- Countdown Complete Transition View -->
+    <div class="countdown-complete-view" id="countdown-complete-view">
+        <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" 
+             alt="Odyssey 2025 Logo" 
+             class="pulsating-logo w-60 md:w-80">
+        <div class="loading-text" id="loading-text">
+            LAUNCHING ODYSSEY 2025
+            <span class="dots animate-typing">...</span>
+        </div>
+    </div>
+    
+    <!-- Video Player -->
+
     <script>
         // Set the registration opening date - April 4, 2025 00:00:00
         const registrationDate = new Date('2025-04-04T00:00:00').getTime();
         
-        // Update the countdown every second
+        // Update countdown every second
         const countdown = setInterval(function() {
             // Get current date and time
             const now = new Date().getTime();
@@ -346,11 +501,13 @@
             document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
             
-            // If the countdown is over, display a message
+            // If the countdown is over, start the celebration
             if (timeRemaining < 0) {
                 clearInterval(countdown);
                 document.querySelector('.registration-message').innerHTML = "Registrations Are Now Open!";
                 document.querySelector('.registration-message').classList.add('text-secondary-color');
+                
+                // Reset all countdown values to 00
                 document.getElementById('days').innerHTML = "00";
                 document.getElementById('hours').innerHTML = "00";
                 document.getElementById('minutes').innerHTML = "00";
@@ -359,124 +516,282 @@
                 // Change the notification button to a registration button
                 const notifyBtn = document.getElementById('notify-btn');
                 notifyBtn.innerHTML = "Register Now";
-                notifyBtn.onclick = function() {
-                    window.location.href = "https://forms.gle/HXwVxJxx2PPfje7N9";
-                };
+                notifyBtn.classList.add('animate-pulse', 'bg-secondary-color', 'text-xl', 'font-bold', 'py-3', 'px-8', 'shadow-lg');
+                
+                // Start the celebration animation
+                startCelebration();
             }
         }, 1000);
         
-        // Notify Me button functionality
-        document.getElementById('notify-btn').addEventListener('click', function() {
-            alert("You'll be notified when registrations open!");
-            // In a real implementation, this would collect the user's email
-        });
-
-        // Calendar dropdown functionality
-        const calendarBtn = document.getElementById('calendar-btn');
-        const calendarDropdown = document.getElementById('calendar-dropdown');
-        const calendarTooltip = document.getElementById('calendar-tooltip');
-        
-        // Toggle calendar dropdown
-        calendarBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            calendarDropdown.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking elsewhere
-        document.addEventListener('click', function() {
-            calendarDropdown.classList.remove('active');
-        });
-        
-        // Prevent dropdown from closing when clicking inside it
-        calendarDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-        
-        // Calendar options functionality
-        const calendarOptions = document.querySelectorAll('.calendar-option');
-        
-        calendarOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const calendarType = this.getAttribute('data-calendar');
-                addToCalendar(calendarType);
-                calendarDropdown.classList.remove('active');
+        // Celebration animation function
+        function startCelebration() {
+            setTimeout(() => {
+                const celebrationContainer = document.getElementById('celebration-container');
+                celebrationContainer.style.display = 'block';
                 
-                // Show tooltip
-                calendarTooltip.classList.add('show-tooltip');
+                createConfetti();
+                createFireworks();
+
                 setTimeout(() => {
-                    calendarTooltip.classList.remove('show-tooltip');
-                }, 2000);
-            });
-        });
+                    const celebrationText = document.getElementById('celebration-text');
+                    celebrationText.style.opacity = '1';
+                    celebrationText.style.animation = 'scale-bounce 1s ease';
+                }, 500);
+
+                // Modified transition to redirect after animations
+                setTimeout(() => {
+                    smoothTransition(celebrationContainer, document.getElementById('countdown-complete-view'));
+                    
+                    // Redirect after 5 seconds of showing the complete view
+                    setTimeout(() => {
+                        window.location.href = "cc.html";
+                    }, 5000); // 5 second delay before redirect
+                }, 5000); // Wait 5 seconds before showing complete view
+            }, 1000);
+        }
         
-        // Function to add event to different calendars
-        function addToCalendar(calendarType) {
-            // Event details
-            const eventTitle = "Odyssey 2025 Registration Opens";
-            const eventDescription = "Registration for Odyssey 2025 event at Jain College of Engineering opens.";
-            const eventLocation = "Jain College of Engineering";
-            const startDate = "20250404T000000";
-            const endDate = "20250404T235900";
+        // Add smooth transition function
+        function smoothTransition(fromElement, toElement, duration = 800) {
+            if (fromElement) {
+                fromElement.style.opacity = '0';
+                setTimeout(() => {
+                    fromElement.style.display = 'none';
+                }, duration);
+            }
             
-            // Format dates for different calendar services
-            const formatDate = new Date('2025-04-04T00:00:00');
-            const formattedStart = formatDate.toISOString().replace(/-|:|\.\d+/g, '');
-            const formattedEnd = new Date(formatDate.getTime() + 24*60*60*1000).toISOString().replace(/-|:|\.\d+/g, '');
-            
-            let calendarUrl = '';
-            
-            switch(calendarType) {
-                case 'google':
-                    calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${formattedStart}/${formattedEnd}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`;
-                    window.open(calendarUrl, '_blank');
-                    break;
-                    
-                case 'outlook':
-                    calendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(eventTitle)}&body=${encodeURIComponent(eventDescription)}&startdt=${formatDate.toISOString()}&enddt=${new Date(formatDate.getTime() + 24*60*60*1000).toISOString()}&location=${encodeURIComponent(eventLocation)}`;
-                    window.open(calendarUrl, '_blank');
-                    break;
-                    
-                case 'apple':
-                    // For Apple Calendar, we'll create and download an .ics file
-                    generateICSFile();
-                    break;
-                    
-                case 'ics':
-                    // Generate and download a generic .ics file
-                    generateICSFile();
-                    break;
+            if (toElement) {
+                setTimeout(() => {
+                    toElement.style.display = 'flex';
+                    requestAnimationFrame(() => {
+                        toElement.style.opacity = '1';
+                    });
+                }, fromElement ? duration : 0);
             }
         }
         
-        // Function to generate and download ICS file
-        function generateICSFile() {
-            const eventTitle = "Odyssey 2025 Registration Opens";
-            const eventDescription = "Registration for Odyssey 2025 event at Jain College of Engineering opens.";
-            const eventLocation = "Jain College of Engineering";
-            const startDate = "20250404T000000";
-            const endDate = "20250404T235900";
+        // Create confetti function
+        function createConfetti() {
+            const celebrationContainer = document.getElementById('celebration-container');
+            const colors = ['#8ec260', '#6b5c8a', '#ffffff', '#ffcc00', '#ff6699'];
             
-            const icsContent = 
-`BEGIN:VCALENDAR
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Random position, size, color and animation duration
+                const size = Math.random() * 12 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Some confetti can be rectangular
+                if (Math.random() > 0.6) {
+                    confetti.style.borderRadius = '0';
+                    confetti.style.width = `${Math.random() * 15 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }
+                
+                // Animation duration and delay
+                const duration = Math.random() * 3 + 3;
+                confetti.style.animationDuration = `${duration}s`;
+                confetti.style.animationDelay = `${Math.random() * 5}s`;
+                
+                celebrationContainer.appendChild(confetti);
+            }
+        }
+        
+        // Create fireworks function
+        function createFireworks() {
+            const celebrationContainer = document.getElementById('celebration-container');
+            const colors = ['#8ec260', '#6b5c8a', '#ffffff', '#ffcc00', '#ff6699'];
+            
+            // Create 10 fireworks at different positions
+            for (let j = 0; j < 10; j++) {
+                setTimeout(() => {
+                    const xPos = Math.random() * window.innerWidth;
+                    const yPos = Math.random() * (window.innerHeight / 2);
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Create particles for each firework
+                    for (let i = 0; i < 30; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = Math.random() * 100 + 50;
+                        const firework = document.createElement('div');
+                        firework.classList.add('firework');
+                        
+                        firework.style.backgroundColor = color;
+                        firework.style.left = `${xPos}px`;
+                        firework.style.top = `${yPos}px`;
+                        firework.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+                        firework.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
+                        
+                        const size = Math.random() * 4 + 2;
+                        firework.style.width = `${size}px`;
+                        firework.style.height = `${size}px`;
+                        
+                        // Animation duration
+                        const duration = Math.random() * 1 + 1;
+                        firework.style.animationDuration = `${duration}s`;
+                        
+                        celebrationContainer.appendChild(firework);
+                        
+                        // Remove the firework particle after animation
+                        setTimeout(() => {
+                            if (firework.parentNode === celebrationContainer) {
+                                celebrationContainer.removeChild(firework);
+                            }
+                        }, duration * 1000);
+                    }
+                }, j * 800); // Stagger fireworks
+            }
+        }
+        
+        // Start video function
+        function startVideo() {
+    const videoContainer = document.getElementById('video-container');
+    const introVideo = document.getElementById('intro-video');
+    const countdownCompleteView = document.getElementById('countdown-complete-view');
+    const skipButton = document.getElementById('skip-video');
+
+    // Set local video source
+    introVideo.src = "video.mp4";  
+    introVideo.load(); // Ensure the new source is loaded
+
+    // Show the video container
+    smoothTransition(countdownCompleteView, videoContainer);
+
+    // Try to autoplay the video after a short delay
+    setTimeout(() => {
+        introVideo.play().catch(error => {
+            console.error("Auto-play was prevented:", error);
+            // Show a play button if autoplay is blocked
+            const playButton = document.createElement('button');
+            playButton.innerHTML = 'Play Video';
+            playButton.className = 'cta-button';
+            playButton.style.position = 'absolute';
+            playButton.style.top = '50%';
+            playButton.style.left = '50%';
+            playButton.style.transform = 'translate(-50%, -50%)';
+            playButton.onclick = () => {
+                introVideo.play();
+                playButton.remove();
+            };
+
+            document.querySelector('.video-wrapper').appendChild(playButton);
+        });
+    }, 500);
+
+    // Redirect to main page when video ends
+    introVideo.onended = function() {
+        window.location.href = "cc.html";
+    };
+
+    // Skip button functionality
+    skipButton.onclick = function() {
+        window.location.href = "cc.html"; // Redirect immediately
+    };
+}
+
+        // Skip video button functionality
+        document.getElementById('skip-video').addEventListener('click', function() {
+            window.location.href = "cc.html";
+            // Skip video button functionality
+        });
+
+        // Calendar dropdown functionality
+const calendarBtn = document.getElementById('calendar-btn');
+const calendarDropdown = document.getElementById('calendar-dropdown');
+const calendarTooltip = document.getElementById('calendar-tooltip');
+
+// Toggle calendar dropdown
+calendarBtn.addEventListener('click', function() {
+    calendarDropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    if (!calendarBtn.contains(event.target) && !calendarDropdown.contains(event.target)) {
+        calendarDropdown.classList.remove('active');
+    }
+});
+
+// Calendar option click handlers
+const calendarOptions = document.querySelectorAll('.calendar-option');
+calendarOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        const calendarType = this.getAttribute('data-calendar');
+        
+        // Logic for different calendar types
+        switch(calendarType) {
+            case 'google':
+                // Google Calendar URL
+                window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Odyssey%202025%20Registration&dates=20250404T000000Z/20250404T010000Z&details=Registration%20for%20Odyssey%202025%20opens!&location=Jain%20College%20of%20Engineering');
+                break;
+            case 'outlook':
+                // Outlook Calendar URL
+                window.open('https://outlook.live.com/calendar/0/deeplink/compose?subject=Odyssey%202025%20Registration&startdt=2025-04-04T00:00:00&enddt=2025-04-04T01:00:00&body=Registration%20for%20Odyssey%202025%20opens!&location=Jain%20College%20of%20Engineering');
+                break;
+            case 'apple':
+                // For Apple Calendar, we'll download the ICS file
+                downloadICS();
+                break;
+            case 'ics':
+                downloadICS();
+                break;
+        }
+        
+        // Hide dropdown and show tooltip
+        calendarDropdown.classList.remove('active');
+        calendarTooltip.classList.add('show-tooltip');
+        
+        // Hide tooltip after 3 seconds
+        setTimeout(() => {
+            calendarTooltip.classList.remove('show-tooltip');
+        }, 3000);
+    });
+});
+
+// Function to download ICS file
+function downloadICS() {
+    const icsData = `BEGIN:VCALENDAR
 VERSION:2.0
+PRODID:-//Odyssey2025//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-SUMMARY:${eventTitle}
-DESCRIPTION:${eventDescription}
-LOCATION:${eventLocation}
-DTSTART:${startDate}
-DTEND:${endDate}
+SUMMARY:Odyssey 2025 Registration
+DTSTART:20250404T000000Z
+DTEND:20250404T010000Z
+LOCATION:Jain College of Engineering
+DESCRIPTION:Registration for Odyssey 2025 opens!
+STATUS:CONFIRMED
+SEQUENCE:0
 END:VEVENT
 END:VCALENDAR`;
-            
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'odyssey2025_registration.ics';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
+    
+    const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'odyssey_2025_registration.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Notify Me button functionality
+document.getElementById('notify-btn').addEventListener('click', function() {
+    // Check if registration is already open
+    const now = new Date().getTime();
+    if (now >= registrationDate) {
+        // Registration is open, redirect to registration page
+        window.location.href = "registration.html";
+    } else {
+        // Show email notification form/modal
+        alert("We'll notify you when registrations open!");
+        // In a real implementation, this would be a modal with a form to collect email
+    }
+});
+</script>
 </body>
 </html>

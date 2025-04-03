@@ -280,50 +280,6 @@
             }
         }
         
-        /* VIDEO PLAYER STYLES */
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .video-wrapper {
-            position: relative;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-        }
-        
-        .intro-video {
-            width: 100%;
-            height: auto;
-            box-shadow: 0 0 30px rgba(142, 194, 96, 0.5);
-        }
-        
-        .skip-button {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: 1px solid white;
-            border-radius: 4px;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            z-index: 2001;
-        }
-        
-        .skip-button:hover {
-            background-color: rgba(142, 194, 96, 0.8);
-        }
         
         .countdown-complete-view {
             display: none;
@@ -520,17 +476,7 @@
     </div>
     
     <!-- Video Player -->
-    <div class="video-container" id="video-container">
-        <div class="video-wrapper">
-            <video id="intro-video" class="intro-video" controls>
-                <!-- Video source will be set via JavaScript -->
-            </video>
-            <button class="skip-button" id="skip-video">
-                Skip Video
-            </button>
-        </div>
-    </div>
-    
+
     <script>
         // Set the registration opening date - April 4, 2025 00:00:00
         const registrationDate = new Date('2025-04-02T00:00:00').getTime();
@@ -579,34 +525,28 @@
         
         // Celebration animation function
         function startCelebration() {
-            // Delayed start of the celebration
             setTimeout(() => {
-                // Display the celebration container
                 const celebrationContainer = document.getElementById('celebration-container');
                 celebrationContainer.style.display = 'block';
                 
-                // Create confetti
                 createConfetti();
-                
-                // Create fireworks
                 createFireworks();
-                
-                // Show and animate the celebration text
+
                 setTimeout(() => {
                     const celebrationText = document.getElementById('celebration-text');
                     celebrationText.style.opacity = '1';
                     celebrationText.style.animation = 'scale-bounce 1s ease';
                 }, 500);
-                
-                // Transition to the countdown complete view
+
+                // Modified transition to redirect after animations
                 setTimeout(() => {
                     smoothTransition(celebrationContainer, document.getElementById('countdown-complete-view'));
                     
-                    // Start video player after a delay
+                    // Redirect after 5 seconds of showing the complete view
                     setTimeout(() => {
-                        startVideo();
-                    }, 4000);
-                }, 5000);
+                        window.location.href = "cc.html";
+                    }, 5000); // 5 second delay before redirect
+                }, 5000); // Wait 5 seconds before showing complete view
             }, 1000);
         }
         
