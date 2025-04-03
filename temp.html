@@ -18,6 +18,7 @@
             --dark-color: #20232a;
             --light-color: #f4f4f4;
             --overlay-color: rgba(32, 35, 42, 0.9);
+            --typing-duration: 1.5s;
         }
         
         body {
@@ -90,15 +91,9 @@
         }
         
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .cta-button {
@@ -235,12 +230,8 @@
         }
         
         @keyframes confetti-fall {
-            0% {
-                transform: translate3d(0, -100px, 0) rotateZ(0deg);
-            }
-            100% {
-                transform: translate3d(0, calc(100vh + 100px), 0) rotateZ(360deg);
-            }
+            0% { transform: translate3d(0, -100px, 0) rotateZ(0deg); }
+            100% { transform: translate3d(0, calc(100vh + 100px), 0) rotateZ(360deg); }
         }
         
         .celebration-text {
@@ -258,24 +249,11 @@
             z-index: 1001;
         }
         
-        .celebration-text.active {
-            opacity: 1;
-            animation: scale-bounce 1s ease;
-        }
-        
         @keyframes scale-bounce {
-            0% {
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            70% {
-                transform: translate(-50%, -50%) scale(0.9);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
+            0% { transform: translate(-50%, -50%) scale(0.5); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            70% { transform: translate(-50%, -50%) scale(0.9); }
+            100% { transform: translate(-50%, -50%) scale(1); }
         }
         
         .firework {
@@ -356,16 +334,11 @@
             height: 100%;
             z-index: 1500;
             background: radial-gradient(circle, rgba(106, 92, 138, 0.9) 0%, rgba(32, 35, 42, 1) 100%);
-            display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             opacity: 0;
             transition: opacity 0.5s ease;
-        }
-        
-        .countdown-complete-view.active {
-            opacity: 1;
         }
         
         .pulsating-logo {
@@ -394,19 +367,20 @@
             position: relative;
         }
         
-        .loading-text:after {
-            content: '...';
-            position: absolute;
-            animation: loading-dots 1.5s infinite;
-            width: 0;
-            overflow: hidden;
+        .animate-typing {
+            animation: typing var(--typing-duration) infinite;
         }
         
-        @keyframes loading-dots {
+        @keyframes typing {
             0% { width: 0; }
             33% { width: 1em; }
             66% { width: 2em; }
             100% { width: 3em; }
+        }
+        
+        .dots {
+            display: inline-block;
+            overflow: hidden;
         }
         
         @media (max-width: 768px) {
@@ -459,7 +433,7 @@
     <!-- Main Countdown Section -->
     <section class="hero">
         <div class="container mx-auto px-4 text-center">
-            <div class="logo-container mb-10" data-aos="fade-down" data-aos-duration="1000">
+            <div class="logo-container mb-10">
                 <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" alt="Odyssey 2025 Logo" class="logo mx-auto">
             </div>
             
@@ -529,31 +503,37 @@
     
     <!-- Celebration Animation Container -->
     <div class="celebration-container" id="celebration-container">
-        <div class="celebration-text" id="celebration-text">WELCOME TO ODYSSEY 2025!</div>
+        <div class="celebration-text" id="celebration-text">
+            WELCOME TO ODYSSEY 2025!
+        </div>
     </div>
     
     <!-- Countdown Complete Transition View -->
     <div class="countdown-complete-view" id="countdown-complete-view">
-        <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" alt="Odyssey 2025 Logo" class="logo pulsating-logo">
-        <div class="loading-text">LAUNCHING ODYSSEY 2025</div>
+        <img src="https://cdn.glitch.global/c5c5cc25-c9e2-4632-9fff-bf5709d93306/Asset%203mdpi.png?v=1743273686478" 
+             alt="Odyssey 2025 Logo" 
+             class="pulsating-logo w-60 md:w-80">
+        <div class="loading-text" id="loading-text">
+            LAUNCHING ODYSSEY 2025
+            <span class="dots animate-typing">...</span>
+        </div>
     </div>
     
     <!-- Video Player -->
     <div class="video-container" id="video-container">
         <div class="video-wrapper">
             <video id="intro-video" class="intro-video" controls>
-                <!-- Replace with your actual video source -->
-                <source src="your-intro-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
+                <!-- Video source will be set via JavaScript -->
             </video>
-            <button class="skip-button" id="skip-video">Skip Intro</button>
+            <button class="skip-button" id="skip-video">
+                Skip Video
+            </button>
         </div>
     </div>
     
     <script>
         // Set the registration opening date - April 4, 2025 00:00:00
-        // For testing, you can set this to a time that's closer to now
-        const registrationDate = new Date('2025-04-03T22:50:00').getTime();
+        const registrationDate = new Date('2025-04-02T00:00:00').getTime();
         
         // Update countdown every second
         const countdown = setInterval(function() {
@@ -580,6 +560,8 @@
                 clearInterval(countdown);
                 document.querySelector('.registration-message').innerHTML = "Registrations Are Now Open!";
                 document.querySelector('.registration-message').classList.add('text-secondary-color');
+                
+                // Reset all countdown values to 00
                 document.getElementById('days').innerHTML = "00";
                 document.getElementById('hours').innerHTML = "00";
                 document.getElementById('minutes').innerHTML = "00";
@@ -588,6 +570,7 @@
                 // Change the notification button to a registration button
                 const notifyBtn = document.getElementById('notify-btn');
                 notifyBtn.innerHTML = "Register Now";
+                notifyBtn.classList.add('animate-pulse', 'bg-secondary-color', 'text-xl', 'font-bold', 'py-3', 'px-8', 'shadow-lg');
                 
                 // Start the celebration animation
                 startCelebration();
@@ -611,16 +594,13 @@
                 // Show and animate the celebration text
                 setTimeout(() => {
                     const celebrationText = document.getElementById('celebration-text');
-                    celebrationText.classList.add('active');
+                    celebrationText.style.opacity = '1';
+                    celebrationText.style.animation = 'scale-bounce 1s ease';
                 }, 500);
                 
                 // Transition to the countdown complete view
                 setTimeout(() => {
-                    const countdownCompleteView = document.getElementById('countdown-complete-view');
-                    countdownCompleteView.style.display = 'flex';
-                    setTimeout(() => {
-                        countdownCompleteView.classList.add('active');
-                    }, 100);
+                    smoothTransition(celebrationContainer, document.getElementById('countdown-complete-view'));
                     
                     // Start video player after a delay
                     setTimeout(() => {
@@ -630,17 +610,36 @@
             }, 1000);
         }
         
+        // Add smooth transition function
+        function smoothTransition(fromElement, toElement, duration = 800) {
+            if (fromElement) {
+                fromElement.style.opacity = '0';
+                setTimeout(() => {
+                    fromElement.style.display = 'none';
+                }, duration);
+            }
+            
+            if (toElement) {
+                setTimeout(() => {
+                    toElement.style.display = 'flex';
+                    requestAnimationFrame(() => {
+                        toElement.style.opacity = '1';
+                    });
+                }, fromElement ? duration : 0);
+            }
+        }
+        
         // Create confetti function
         function createConfetti() {
             const celebrationContainer = document.getElementById('celebration-container');
             const colors = ['#8ec260', '#6b5c8a', '#ffffff', '#ffcc00', '#ff6699'];
             
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 200; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 
                 // Random position, size, color and animation duration
-                const size = Math.random() * 10 + 5;
+                const size = Math.random() * 12 + 5;
                 confetti.style.width = `${size}px`;
                 confetti.style.height = `${size}px`;
                 confetti.style.left = `${Math.random() * 100}%`;
@@ -654,11 +653,9 @@
                     confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
                 }
                 
-                // Animation duration
+                // Animation duration and delay
                 const duration = Math.random() * 3 + 3;
-                confetti.style.animationDuration = `${duration}s, ${duration * 0.5}s`;
-                
-                // Animation delay
+                confetti.style.animationDuration = `${duration}s`;
                 confetti.style.animationDelay = `${Math.random() * 5}s`;
                 
                 celebrationContainer.appendChild(confetti);
@@ -670,7 +667,7 @@
             const celebrationContainer = document.getElementById('celebration-container');
             const colors = ['#8ec260', '#6b5c8a', '#ffffff', '#ffcc00', '#ff6699'];
             
-            // Create 5 fireworks at different positions
+            // Create 10 fireworks at different positions
             for (let j = 0; j < 10; j++) {
                 setTimeout(() => {
                     const xPos = Math.random() * window.innerWidth;
@@ -702,7 +699,9 @@
                         
                         // Remove the firework particle after animation
                         setTimeout(() => {
-                            firework.remove();
+                            if (firework.parentNode === celebrationContainer) {
+                                celebrationContainer.removeChild(firework);
+                            }
                         }, duration * 1000);
                     }
                 }, j * 800); // Stagger fireworks
@@ -711,191 +710,148 @@
         
         // Start video function
         function startVideo() {
-            const videoContainer = document.getElementById('video-container');
-            const introVideo = document.getElementById('intro-video');
-            const countdownCompleteView = document.getElementById('countdown-complete-view');
-            
-            // Hide countdown view
-            countdownCompleteView.style.opacity = '0';
-            setTimeout(() => {
-                countdownCompleteView.style.display = 'none';
-            }, 500);
-            
-            // Show video container
-            videoContainer.style.display = 'flex';
-            
-            // Play video after a short delay
-            setTimeout(() => {
-                introVideo.play().catch(error => {
-                    console.error("Auto-play was prevented:", error);
-                    // If autoplay fails, show a play button
-                    const playButton = document.createElement('button');
-                    playButton.innerHTML = 'Play Video';
-                    playButton.className = 'cta-button';
-                    playButton.style.position = 'absolute';
-                    playButton.style.top = '50%';
-                    playButton.style.left = '50%';
-                    playButton.style.transform = 'translate(-50%, -50%)';
-                    playButton.onclick = () => {
-                        introVideo.play();
-                        playButton.remove();
-                    };
-                    
-                    document.querySelector('.video-wrapper').appendChild(playButton);
-                });
-            }, 500);
-            
-            // When video ends, redirect to main page
-            introVideo.onended = function() {
-                window.location.href = "cc.html";
+    const videoContainer = document.getElementById('video-container');
+    const introVideo = document.getElementById('intro-video');
+    const countdownCompleteView = document.getElementById('countdown-complete-view');
+    const skipButton = document.getElementById('skip-video');
+
+    // Set local video source
+    introVideo.src = "video.mp4";  
+    introVideo.load(); // Ensure the new source is loaded
+
+    // Show the video container
+    smoothTransition(countdownCompleteView, videoContainer);
+
+    // Try to autoplay the video after a short delay
+    setTimeout(() => {
+        introVideo.play().catch(error => {
+            console.error("Auto-play was prevented:", error);
+            // Show a play button if autoplay is blocked
+            const playButton = document.createElement('button');
+            playButton.innerHTML = 'Play Video';
+            playButton.className = 'cta-button';
+            playButton.style.position = 'absolute';
+            playButton.style.top = '50%';
+            playButton.style.left = '50%';
+            playButton.style.transform = 'translate(-50%, -50%)';
+            playButton.onclick = () => {
+                introVideo.play();
+                playButton.remove();
             };
-        }
-        
+
+            document.querySelector('.video-wrapper').appendChild(playButton);
+        });
+    }, 500);
+
+    // Redirect to main page when video ends
+    introVideo.onended = function() {
+        window.location.href = "cc.html";
+    };
+
+    // Skip button functionality
+    skipButton.onclick = function() {
+        window.location.href = "cc.html"; // Redirect immediately
+    };
+}
+
         // Skip video button functionality
         document.getElementById('skip-video').addEventListener('click', function() {
             window.location.href = "cc.html";
-        });
-        
-        // Notify Me button functionality
-        document.getElementById('notify-btn').addEventListener('click', function() {
-            // For demonstration. In real implementation, this would collect email
-            alert("You'll be notified when registrations open!");
-            
-            // After countdown is zero, this button should redirect to registration
-            if (new Date().getTime() > registrationDate) {
-                window.location.href = "https://forms.gle/HXwVxJxx2PPfje7N9";
-            }
+            // Skip video button functionality
         });
 
         // Calendar dropdown functionality
-        // Calendar dropdown functionality
-document.getElementById('calendar-btn').addEventListener('click', function() {
-    const dropdown = document.getElementById('calendar-dropdown');
-    dropdown.classList.toggle('active');
+const calendarBtn = document.getElementById('calendar-btn');
+const calendarDropdown = document.getElementById('calendar-dropdown');
+const calendarTooltip = document.getElementById('calendar-tooltip');
+
+// Toggle calendar dropdown
+calendarBtn.addEventListener('click', function() {
+    calendarDropdown.classList.toggle('active');
 });
 
-// Hide dropdown when clicking outside
+// Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('calendar-dropdown');
-    const calendarBtn = document.getElementById('calendar-btn');
-    
-    if (!calendarBtn.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.remove('active');
+    if (!calendarBtn.contains(event.target) && !calendarDropdown.contains(event.target)) {
+        calendarDropdown.classList.remove('active');
     }
 });
 
-// Calendar options functionality
-document.querySelectorAll('.calendar-option').forEach(option => {
+// Calendar option click handlers
+const calendarOptions = document.querySelectorAll('.calendar-option');
+calendarOptions.forEach(option => {
     option.addEventListener('click', function() {
         const calendarType = this.getAttribute('data-calendar');
-        const eventTitle = "Odyssey 2025 Registration Opens";
-        const startDate = "20250404T000000";
-        const endDate = "20250404T235900";
-        const description = "Registration opens for Odyssey 2025 at Jain College of Engineering. Don't miss out!";
-        const location = "Jain College of Engineering";
         
-        let calendarUrl = "";
-        
+        // Logic for different calendar types
         switch(calendarType) {
             case 'google':
-                calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
-                window.open(calendarUrl, '_blank');
+                // Google Calendar URL
+                window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Odyssey%202025%20Registration&dates=20250404T000000Z/20250404T010000Z&details=Registration%20for%20Odyssey%202025%20opens!&location=Jain%20College%20of%20Engineering');
                 break;
             case 'outlook':
-                calendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(eventTitle)}&startdt=${startDate}&enddt=${endDate}&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
-                window.open(calendarUrl, '_blank');
+                // Outlook Calendar URL
+                window.open('https://outlook.live.com/calendar/0/deeplink/compose?subject=Odyssey%202025%20Registration&startdt=2025-04-04T00:00:00&enddt=2025-04-04T01:00:00&body=Registration%20for%20Odyssey%202025%20opens!&location=Jain%20College%20of%20Engineering');
                 break;
             case 'apple':
-                // For Apple Calendar, we'll create and download an ICS file
-                createAndDownloadICS();
+                // For Apple Calendar, we'll download the ICS file
+                downloadICS();
                 break;
             case 'ics':
-                createAndDownloadICS();
+                downloadICS();
                 break;
         }
         
-        // Show tooltip confirmation
-        const tooltip = document.getElementById('calendar-tooltip');
-        tooltip.classList.add('show-tooltip');
+        // Hide dropdown and show tooltip
+        calendarDropdown.classList.remove('active');
+        calendarTooltip.classList.add('show-tooltip');
         
         // Hide tooltip after 3 seconds
         setTimeout(() => {
-            tooltip.classList.remove('show-tooltip');
+            calendarTooltip.classList.remove('show-tooltip');
         }, 3000);
-        
-        // Hide dropdown
-        document.getElementById('calendar-dropdown').classList.remove('active');
     });
 });
 
-// Function to create and download ICS file
-function createAndDownloadICS() {
-    const eventTitle = "Odyssey 2025 Registration Opens";
-    const startDate = "20250404T000000";
-    const endDate = "20250404T235900";
-    const description = "Registration opens for Odyssey 2025 at Jain College of Engineering. Don't miss out!";
-    const location = "Jain College of Engineering";
+// Function to download ICS file
+function downloadICS() {
+    const icsData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Odyssey2025//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+SUMMARY:Odyssey 2025 Registration
+DTSTART:20250404T000000Z
+DTEND:20250404T010000Z
+LOCATION:Jain College of Engineering
+DESCRIPTION:Registration for Odyssey 2025 opens!
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
     
-    const icsContent = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "CALSCALE:GREGORIAN",
-        "BEGIN:VEVENT",
-        `SUMMARY:${eventTitle}`,
-        `DTSTART:${startDate}`,
-        `DTEND:${endDate}`,
-        `LOCATION:${location}`,
-        `DESCRIPTION:${description}`,
-        "STATUS:CONFIRMED",
-        "SEQUENCE:0",
-        "END:VEVENT",
-        "END:VCALENDAR"
-    ].join("\r\n");
-    
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = "odyssey-2025-registration.ics";
+    link.download = 'odyssey_2025_registration.ics';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 }
 
-// Enhancement: Add smooth transitions between countdown and video
-function enhanceTransitions() {
-    // Add smooth fade-in/out transitions
-    const elements = document.querySelectorAll('.hero, .celebration-container, .countdown-complete-view, .video-container');
-    elements.forEach(el => {
-        el.style.transition = 'opacity 0.8s ease';
-    });
-}
-
-// Call enhancement function when page loads
-window.addEventListener('load', enhanceTransitions);
-
-// Make sure video source is correctly set when available
-document.addEventListener('DOMContentLoaded', () => {
-    // You should replace 'your-intro-video.mp4' with the actual video file
-    // If you have the video URL, uncomment this line and update it:
-    // document.getElementById('intro-video').src = "your-actual-video-url.mp4";
-});
-
-// Fix for responsive design on mobile
-function adjustForMobileDevices() {
-    if (window.innerWidth <= 768) {
-        // Make countdown boxes more compact on small screens
-        document.querySelectorAll('.countdown-box').forEach(box => {
-            box.style.padding = '0.8rem';
-        });
-        
-        // Smaller font for celebration text on mobile
-        document.getElementById('celebration-text').style.fontSize = '2.5rem';
+// Notify Me button functionality
+document.getElementById('notify-btn').addEventListener('click', function() {
+    // Check if registration is already open
+    const now = new Date().getTime();
+    if (now >= registrationDate) {
+        // Registration is open, redirect to registration page
+        window.location.href = "registration.html";
+    } else {
+        // Show email notification form/modal
+        alert("We'll notify you when registrations open!");
+        // In a real implementation, this would be a modal with a form to collect email
     }
-}
-
-// Call responsive adjustment on load and resize
-window.addEventListener('load', adjustForMobileDevices);
-window.addEventListener('resize', adjustForMobileDevices);
-    </script>
+});
+</script>
 </body>
 </html>
