@@ -545,14 +545,14 @@ background-position: center;
 }
 
 /* Different background colors for different departments */
-.book:nth-child(1) .cover { background: url("cult.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(2) .cover { background: url("civil.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(3) .cover { background: url("cs.png"); background-size: cover; background-position: center; }
-.book:nth-child(4) .cover { background: url("ECE.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(5) .cover { background: url("EEE.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(6) .cover { background: url("mech.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(7) .cover { background: url("MBA.jpg"); background-size: cover; background-position: center; }
-.book:nth-child(8) .cover { background: url("MCA.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(1) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/cult.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(2) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/civil.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(3) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/cs.png"); background-size: cover; background-position: center; }
+.book:nth-child(4) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/ECE.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(5) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/EEE.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(6) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/mech.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(7) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/MBA.jpg"); background-size: cover; background-position: center; }
+.book:nth-child(8) .cover { background: url("https://raw.githubusercontent.com/shreyas3github/OdysseyImages/refs/heads/main/MCA.jpg"); background-size: cover; background-position: center; }
 
 
 .cover .text {
