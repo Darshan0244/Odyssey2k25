@@ -181,7 +181,8 @@ h1 {
 
 .image-container {
     position: relative;
-    height: 350px;
+    height: auto;
+    width: 100%;   
     overflow: hidden;
 }
 
