@@ -292,3 +292,65 @@ footer {
         width: 100%; /* Ensure cards don't overflow */
     }
 }
+
+/* Day-wise Events Styles */
+.day-events {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.day-card {
+    background: rgba(30, 45, 50, 0.8);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(38, 232, 160, 0.1);
+    flex: 1;
+    min-width: 280px;
+    max-width: 500px;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.day-card:hover {
+    border-color: #26E8A0;
+    box-shadow: 0 4px 20px rgba(38, 232, 160, 0.2);
+}
+
+.day-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #26E8A0;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(38, 232, 160, 0.2);
+}
+
+.day-card ul {
+    list-style-type: none;
+}
+
+.day-card ul li {
+    color: #a0aec0;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(38, 232, 160, 0.1);
+    text-align: center;
+}
+
+.day-card ul li:last-child {
+    border-bottom: none;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .day-events {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .day-card {
+        width: 100%;
+    }
+}
