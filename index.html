@@ -15,13 +15,13 @@
 
     <div id="rulebook-popup" class="popup-overlay">
         <div class="popup-content">
-          <h2>📘 Rulebook Updated!</h2>
-          <p>Update: If you downloaded the Odyssey-2K25 RuleBook on April 4th, please re-download for the latest changes</p>
-          <button id="popup-close">Got it!</button>
+          <h2>Central Events Schedule Have Been updated</h2>
+          <button id="popup-close">Close</button>
+          <button id="popup-close1">Explore</button>
         </div>
       </div>
     <!-- Preloader -->
-    <div class="preloader">
+    {% comment %} <div class="preloader">
       <div class="preloader-content">
           <div class="loading-logo">
               <svg viewbox="0 0 100 100" width="80" height="80">
@@ -47,7 +47,7 @@
           <div class="loading-message">Preparing your journey...</div>
       </div>
     </div>
-  
+    {% endcomment %}
     
    <section class="hero">   
         <div class="hero-content flex flex-col items-center justify-center px-4 text-center">
@@ -635,6 +635,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("rulebook-popup");
     const closeBtn = document.getElementById("popup-close");
+    const redi = document.getElementById("popup-close1");
 
     // Function to show the pop-up after a delay
     function showPopupAfterDelay() {
@@ -662,8 +663,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Close pop-up when the button is clicked
+    // Close pop-up when the button is clicked
     closeBtn.addEventListener("click", () => {
-      popup.classList.remove("active");
+        popup.classList.remove("active");
+    });
+    redi.addEventListener("click", () => {
+        popup.classList.remove("active");
+        window.location.href = "Central/Central.html";
     });
   });
 
