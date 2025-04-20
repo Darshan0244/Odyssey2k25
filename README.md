@@ -13,7 +13,10 @@ Odyssey 2K25 was a two-day event hosted on **11th & 12th April 2025**, bringing 
 ---
 
 ## 📌 Project Overview
-![Screenshot](https://github.com/Darshan0244/Odyssey2k25/blob/9425c9f558629c29daa3c1cc301294d6900b3df7/Screenshot%202025-04-19%20124130.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Darshan0244/Odyssey2k25/blob/9425c9f558629c29daa3c1cc301294d6900b3df7/Screenshot%202025-04-19%20124130.png?raw=true" alt="Screenshot" />
+</p>
+
 
 The goal of this project was to design and develop a dynamic, responsive, and user-friendly website that:
 
